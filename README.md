@@ -1,1 +1,17 @@
-# Flask-Login
+# Fleksa Internship Assignment 2022
+## Backend Development (Python) internship
+
+
+**1. Installing Requirements**
+```
+pip install -r requirements.txt 
+```
+
+**2.After installing run app.py**
+
+port : 5000
+
+```
+python app.py
+```
+
