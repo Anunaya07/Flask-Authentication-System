@@ -1,6 +1,7 @@
 # =============================================================================
 # importing the necessary libraries
 # =============================================================================
+from tkinter.messagebox import NO
 from flask import Flask, render_template, url_for, redirect, request,Request, Response, session
 from flask_login import login_user, LoginManager, login_required,logout_user, current_user
 from flask_bcrypt import Bcrypt
@@ -121,6 +122,8 @@ def dashboard():
              db.session.add(newAct)
              db.session.commit()
     # print("flag: ", session.get("flag"))
+    if request.method=="GET":
+        session['flag']=None
     
     if session.get('flag')==None:  
         #  print("flag: ", session.get("flag"))
@@ -142,14 +145,10 @@ def dashboard():
              return redirect(url_for('viewStatus'))
          else:
              fiveUserList=[]
+             # The above code is retrieving the user's action from the session.
              userAct = session.get('userAct')
              fishingFive(userAct,fiveUserList)
              return render_template('dashboard.html', form=formStatusUpload, formUserActivity=formUserActivity, fiveUserList=fiveUserList)
-             
-    try:
-        testTheExistense = fiveUserList
-    except:
-        fiveUserList=[]
     return render_template('dashboard.html', form=formStatusUpload, formUserActivity=formUserActivity, fiveUserList=fiveUserList)
 
 # =============================================================================
@@ -158,6 +157,7 @@ def dashboard():
 @app.route('/viewStatus', methods=['GET'])
 @login_required
 def viewStatus():
+    # session['flag']=None
     status = StatusUpload.query.filter_by(userid=session.get('value')).all()
     if status==[]:
         return render_template('statusView.html',flag=0)
