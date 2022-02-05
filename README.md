@@ -1,5 +1,5 @@
-# Fleksa Internship Assignment 2022
-## Backend Development (Python) internship
+# Flask
+## Backend Development Python
 
 
 **1. Installing Requirements**
